@@ -1,5 +1,5 @@
 <?php
-class ReminderPlugin extends MantisPlugin {
+class ImaticReminderPlugin extends MantisPlugin {
 
 	function register() {
 		$this->name        = 'Reminder';
