@@ -53,10 +53,8 @@ class ImaticReminderPlugin extends MantisPlugin
             'reminder_colsep' => ';',
             'reminder_details' => OFF,
             'imatic_reminders_access_threshold' => MANAGER,
-            'imatic_reminder_login' => 'matejbrodziansky@gmail.com',
-            'imatic_reminder_password' => 'mantis135',
-            'imatic_reminder_time_interval_start' => 600,
-            'imatic_reminder_time_interval_end' => 600,
+            'imatic_reminder_time_interval_start' => 60,
+            'imatic_reminder_time_interval_end' => 60,
             'imatic_reminder_mail_subject' => 'Imatic-Reminder',
         );
     }

@@ -5,7 +5,7 @@ $reminds = plugin_get()->imaticReminderGetAllIssueReminders(gpc_get_string('id')
 
 ?>
 
-<div id="imatic-reminder-modal" class="modal  show" tabindex="-1" role="dialog">
+<div id="imatic-reminder-modal" class="modal " tabindex="-1" role="dialog">
     <div class="modal-dialog imatic-remind-modal" role="document">
         <div class="modal-content">
             <div class="modal-header">

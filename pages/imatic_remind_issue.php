@@ -3,13 +3,7 @@
 $reminder = new ImaticReminderPlugin('reminder');
 
 require_once(dirname(__FILE__, 4) . DIRECTORY_SEPARATOR . 'core.php');
-$t_login = plugin_config_get('imatic_reminder_login');
-$t_password = plugin_config_get('imatic_reminder_password');
 
-if (!auth_attempt_script_login($t_login, $t_password)) {
-    echo "Failed to login\n";
-    exit(1);
-}
 $t_core_path = config_get('core_path');
 require_once($t_core_path . 'email_api.php');
 
