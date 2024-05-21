@@ -1,0 +1,33 @@
+.select2 {
+    width:100%!important;
+}
+
+#issue-reminds{
+    padding: 10px 10px;
+    background-color: lightgray;
+}
+
+.imatic-remind-modal {
+    width: 1000px;
+    margin: auto;
+}
+
+
+.imatic-reminder-table {
+    display: table;
+    width: auto;
+    border: 1px solid #666666;
+}
+
+.imatic-reminder-table-row {
+    display: table-row;
+    width: auto;
+    clear: both;
+}
+
+.imatic-reminder-table-col {
+    float: left;
+    display: table-column;
+    width: 200px;
+    border: 1px solid #ccc;
+}
