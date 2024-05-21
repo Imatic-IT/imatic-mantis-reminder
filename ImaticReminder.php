@@ -212,4 +212,14 @@ class ImaticReminderPlugin extends MantisPlugin
 
         return $result;
     }
+
+    function imaticMarkIssueAsReminded($reminderId, $userId)
+    {
+
+        $db = db_get_table('imatic_reminder_remind_issue');
+        $sql = "UPDATE " . $db . " SET reminded=true, deleted_at=" . time() . " WHERE id=" . $reminderId . " AND user_id=" . $userId;
+
+        db_query($sql);
+        return db_affected_rows();
+    }
 }
