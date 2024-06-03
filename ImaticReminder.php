@@ -6,9 +6,6 @@
 // TODO : daily weekly .. turn of remind where ?.
 // TODO VALIDATE IN JS IF DATE IS IN THE PAST OR IS EMPTY
 
-//require_once('core/functions.php');
-include_once('core/functions.php');
-
 class ImaticReminderPlugin extends MantisPlugin
 {
     private const IMATIC_REMINDER_PAGE = 'imatic_remind_issue.php';
@@ -159,7 +156,7 @@ class ImaticReminderPlugin extends MantisPlugin
 
         $db = db_get_table('imatic_reminder_remind_issue');
         $sql = 'SELECT * FROM ' . $db . ' WHERE issue_id = ' . $issueId ;
-        $sql .= 'ORDER BY remind_at ASC';
+        $sql .= ' ORDER BY remind_at ASC';
         $result = iterator_to_array(db_query($sql, []));
 
         return $result;
@@ -171,7 +168,7 @@ class ImaticReminderPlugin extends MantisPlugin
 
         $db = db_get_table('imatic_reminder_remind_issue');
         $sql = 'SELECT * FROM ' . $db . ' WHERE issue_id = ' . $issueId . ' AND reminded_by_user_id = ' . $userId;
-        $sql .= 'ORDER BY remind_at ASC';
+        $sql .= ' ORDER BY remind_at ASC';
         $result = iterator_to_array(db_query($sql, []));
 
         return $result;
