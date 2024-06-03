@@ -5,13 +5,19 @@ $reminds = plugin_get()->imaticReminderGetAllIssueReminders(gpc_get_string('id')
 
 ?>
 
-<div id="imatic-reminder-modal" class="modal " tabindex="-1" role="dialog">
+<div id="imatic-reminder-modal" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog imatic-remind-modal" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title"><?php echo lang_get('imatic_reminder_button') ?></h5>
+
+                <button type="button" class="close imatic-reminde-modal-close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <form id="imatic-reminder-create-form" action="<?php echo plugin_page('imatic_save_remind.php') ?>" method="post">
+
+            <form id="imatic-reminder-create-form" action="<?php echo plugin_page('imatic_save_remind.php') ?>"
+                  method="post">
                 <div class="modal-body">
 
                     <div class="modal-recipients">
@@ -28,6 +34,7 @@ $reminds = plugin_get()->imaticReminderGetAllIssueReminders(gpc_get_string('id')
                         </select>
                     </div>
 
+
                     <br>
                     <hr>
 
@@ -41,18 +48,24 @@ $reminds = plugin_get()->imaticReminderGetAllIssueReminders(gpc_get_string('id')
 
                             </div>
 
-<!--                            TODO REMINDER REPEATER-->
-<!--                            <div class="col-md-3">-->
-<!--                                <p>--><?php //echo lang_get('imatic_add_repeat') ?><!-- </p>-->
-<!---->
-<!--                                <select disabled name="" id="">-->
-<!--                                    <option value="">--><?php //echo lang_get('imatic_remind_do_not_repeat') ?><!--</option>-->
-<!--                                    <option value="">--><?php //echo lang_get('imatic_remind_daily') ?><!-- </option>-->
-<!--                                    <option value="">--><?php //echo lang_get('imatic_remind_weekly') ?><!--</option>-->
-<!--                                    <option value="">--><?php //echo lang_get('imatic_remind_monthly') ?><!--</option>-->
-<!--                                    <option value="">--><?php //echo lang_get('imatic_remind_yearly') ?><!--</option>-->
-<!--                                </select>-->
-<!--                            </div>-->
+                            <!--                            TODO REMINDER REPEATER-->
+                            <!--                            <div class="col-md-3">-->
+                            <!--                                <p>-->
+                            <?php //echo lang_get('imatic_add_repeat') ?><!-- </p>-->
+                            <!---->
+                            <!--                                <select disabled name="" id="">-->
+                            <!--                                    <option value="">-->
+                            <?php //echo lang_get('imatic_remind_do_not_repeat') ?><!--</option>-->
+                            <!--                                    <option value="">-->
+                            <?php //echo lang_get('imatic_remind_daily') ?><!-- </option>-->
+                            <!--                                    <option value="">-->
+                            <?php //echo lang_get('imatic_remind_weekly') ?><!--</option>-->
+                            <!--                                    <option value="">-->
+                            <?php //echo lang_get('imatic_remind_monthly') ?><!--</option>-->
+                            <!--                                    <option value="">-->
+                            <?php //echo lang_get('imatic_remind_yearly') ?><!--</option>-->
+                            <!--                                </select>-->
+                            <!--                            </div>-->
 
                         </div>
                     </div>
@@ -76,7 +89,7 @@ $reminds = plugin_get()->imaticReminderGetAllIssueReminders(gpc_get_string('id')
                             class="btn btn-primary"
                     />
                     <button
-                            type="button" class="btn btn-secondary"
+                            type="button" class="btn btn-danger text-dark"
                             id="imatic-reminder-close-modal"
                             data-dismiss="modal"
                             aria-label="Close"

@@ -1,5 +1,91 @@
 # Reminder Plugin
 
+
+## Imatic  Features 
+
+### Issue Notification Plugin
+
+This plugin allows you to set up issue notifications that are automatically sent via a cron job.
+
+#### Features:
+- **Notification Setup:** Allows users to set notifications for specific issues.
+- **Automated Sending:** A cron job automatically sends notifications according to the configured schedule.
+- **UTF-8 and Emoji Support:** Notifications can include UTF-8 characters and emojis, properly encoded for email subjects.
+
+### Setting Up and Sending Reminders
+
+You can set up and send reminders directly from an issue in the menu. Look for the button where the native Mantis reminder functionality is also located. This allows you to easily configure and send custom reminders without leaving the issue page.
+
+## Requirements
+
+The plugin requires MantisBT version 2.0 or higher.
+
+Make sure to have this statement in confg_inc.php:
+
+## Installation
+
+Like any other plugin. After copying to your webserver :
+
+- Start mantis as administrator
+- Select manage
+- Select manage Plugins
+- Select Install behind *Reminder*
+
+Ensure you have a configured cron job to run the notification sending script.
+
+
+#### Configuration Parameters:
+
+##### Time Interval Settings:
+- **`imatic_reminder_time_interval_start`:**
+   - **Description:** This parameter defines the start of the time interval (in minutes) within which the reminder can be sent.
+   - **Example:** `'imatic_reminder_time_interval_start' => 60`
+   - **Usage:** If set to 60, the reminder will start being considered for sending 60 minutes before the scheduled time.
+
+- **`imatic_reminder_time_interval_end`:**
+   - **Description:** This parameter defines the end of the time interval (in minutes) within which the reminder can be sent.
+   - **Example:** `'imatic_reminder_time_interval_end' => 60`
+   - **Usage:** If set to 60, the reminder will still be considered valid for sending up to 60 minutes after the scheduled time.
+
+These time intervals create a tolerance window to ensure that reminders are not missed due to slight deviations in the cron job's execution time.
+
+##### Email Subject Prefix:
+- **`imatic_reminder_mail_subject_prefix`:**
+   - **Description:** This parameter sets the prefix for the email subject. It can be defined in the plugin language file (plugins/ImaticReminder/lang/strings_english.txt).
+   - **Example:** `'imatic_reminder_mail_subject_prefix' => lang_get('imatic_reminder_reminder_email_subject_prefix')`
+   - **Usage:** Define this in your plugin language file to customize the subject prefix text based on the user's language settings.
+
+- **`imatic_reminder_mail_subject_prefix_icon`:**
+   - **Description:** This parameter sets an icon (such as an emoji) to be included in the email subject prefix. It can be defined in the plugin configuration 
+   - **Example:** `'imatic_reminder_mail_subject_prefix_icon' => '&#128276;'`  // Icon from [UTF-8 Icons](https://utf8-icons.com/bell-128276)
+   - **Usage:** Use the HTML entity for the desired icon to include it in the subject prefix.
+
+
+### Access Control
+
+- **`imatic_reminders_access_threshold`:**
+    - **Description:** This parameter defines the access level required to view all reminders.
+    - **Example:** `'imatic_reminders_access_threshold' => MANAGER`
+    - **Usage:** Users with the specified access level (e.g., MANAGER) can see all reminders.
+
+Users with insufficient permissions will only see reminders that they have set themselves.
+
+
+### Example Test
+
+To test the reminder functionality, you can use the following command:
+
+```sh
+wget -q -O - 'http://localhost:8888/path_to_your_mantis/imatic-mantis/plugin.php?page=ImaticReminder/imatic_remind_issue.php'
+```
+
+
+
+##  DEFAULT FEATURES REMINDER PLUGIN
+## Reminder Plugin 
+
+
+   
 Copyright (c) 2009  Cas Nuy - cas@nuy.info - http://www.nuy.info
 
 Released under the [GPL 2.0](http://opensource.org/licenses/GPL-2.0)

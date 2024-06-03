@@ -44,8 +44,8 @@ if (plugin_get()->imaticRemindersAccessTreshold()) {
                         <textarea name="message" class="form-control" rows="1"
                                   cols="20"><?php echo htmlspecialchars($reminder['message']) ?></textarea>
                         </td>
-                        <td>
-                            <?php echo $reminder['reminded'] !== 'f' ? '<i class="btn btn-success btn-xs fa fa-check"/>' : '<i class="btn btn-danger btn-xs fa fa-close" />' ?>
+                        <td class="text-center">
+                            <?php echo $reminder['reminded'] !== 'f' ? '<i class="fa fa-check"/>' : '<i class="fa fa-close text-danger" />' ?>
                         </td>
                         <td>
                             <button type="button" class="btn btn-primary btn-xs edit-reminder"

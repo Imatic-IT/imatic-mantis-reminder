@@ -57,3 +57,4 @@ $s_imatic_reminder_reminder_created_error    = 'Error creating reminder';
 $s_imatic_reminder_reminder_edit_success     = 'Reminder edited successfully';
 $s_imatic_reminder_reminder_delete_success   = 'Reminder deleted successfully';
 $s_imatic_reminder_reminder_not_permission    = 'You do not have permission to create, edit or delete this reminder';
+$s_imatic_reminder_reminder_email_subject_prefix = 'Imatic Reminder - ';

@@ -31,3 +31,13 @@
     width: 200px;
     border: 1px solid #ccc;
 }
+
+
+/*Remove opacity close button (has bootstrap default has opacity)*/
+.imatic-reminde-modal-close{
+    opacity: 1;
+    padding: 5px 10px !important;
+    background-color: #D15B47 !important;
+    color: white !important;
+    border-radius: 5px;
+}

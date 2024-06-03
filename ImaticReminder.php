@@ -55,7 +55,8 @@ class ImaticReminderPlugin extends MantisPlugin
             'imatic_reminders_access_threshold' => MANAGER,
             'imatic_reminder_time_interval_start' => 60,
             'imatic_reminder_time_interval_end' => 60,
-            'imatic_reminder_mail_subject' => 'Imatic-Reminder',
+            'imatic_reminder_mail_subject_prefix' => lang_get('imatic_reminder_reminder_email_subject_prefix'),
+            'imatic_reminder_mail_subject_prefix_icon' => '&#128276;',  // Icon from https://utf8-icons.com/bell-128276
         );
     }
 
@@ -157,7 +158,8 @@ class ImaticReminderPlugin extends MantisPlugin
         }
 
         $db = db_get_table('imatic_reminder_remind_issue');
-        $sql = 'SELECT * FROM ' . $db . ' WHERE issue_id = ' . $issueId . ' AND deleted_at IS NULL';
+        $sql = 'SELECT * FROM ' . $db . ' WHERE issue_id = ' . $issueId ;
+        $sql .= 'ORDER BY remind_at ASC';
         $result = iterator_to_array(db_query($sql, []));
 
         return $result;
@@ -169,6 +171,7 @@ class ImaticReminderPlugin extends MantisPlugin
 
         $db = db_get_table('imatic_reminder_remind_issue');
         $sql = 'SELECT * FROM ' . $db . ' WHERE issue_id = ' . $issueId . ' AND reminded_by_user_id = ' . $userId;
+        $sql .= 'ORDER BY remind_at ASC';
         $result = iterator_to_array(db_query($sql, []));
 
         return $result;
@@ -223,3 +226,4 @@ class ImaticReminderPlugin extends MantisPlugin
         return db_affected_rows();
     }
 }
+
