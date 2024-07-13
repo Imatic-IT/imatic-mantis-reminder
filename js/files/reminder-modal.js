@@ -5,19 +5,20 @@ $(document).ready(function () {
     const toolBox = $('.widget-toolbox a');
     const closeModalButton = $('#imatic-reminder-close-modal')
 
-
-    toolBox.on('click', function (e) {
+    toolBox.each(function () {
         const attributeHref = $(this).attr('href');
         if (attributeHref.includes('imatic_remind_issue.php')) {
-            e.preventDefault()
+            const reminderCount = $('#count-reminders').data('count');
+            if (reminderCount > 0) {
+                $(this).removeClass('btn-primary').addClass('btn-warning');
+            }
 
-            toggleImaticReminderModal();
-
-        } else {
-            return null;
+            $(this).on('click', function (e) {
+                e.preventDefault()
+                toggleImaticReminderModal();
+            })
         }
     })
-
 
     function toggleImaticReminderModal() {
         const imaticReminderModal = $('#imatic-reminder-modal');
@@ -37,7 +38,5 @@ $(document).ready(function () {
     $('.other-button').on('click', function () {
         toggleImaticReminderModal();
     });
-
-
 });
 

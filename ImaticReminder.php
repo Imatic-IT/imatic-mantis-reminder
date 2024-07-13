@@ -16,9 +16,8 @@ class ImaticReminderPlugin extends MantisPlugin
         $this->description = lang_get('reminder_plugin_desc');
         $this->version = '3.0';
         $this->requires = array('MantisCore' => '2.0.0',);
-        $this->author = 'Cas Nuy';
-        $this->contact = 'Cas-at-nuy.info';
-        $this->url = 'https://github.com/mantisbt-plugins/Reminder';
+        $this->author = 'Imatic software';
+        $this->contact = 'info@imatic.cz';
         $this->page = 'config';
     }
 
@@ -109,7 +108,6 @@ class ImaticReminderPlugin extends MantisPlugin
 
     public function layoutBodyEndHook($p_event)
     {
-
         $t_data = htmlspecialchars(json_encode([
             'imatic_reminder_page' => self::IMATIC_REMINDER_PAGE,
         ]));
@@ -175,10 +173,14 @@ class ImaticReminderPlugin extends MantisPlugin
 
     }
 
-    public function imaticReminderDeleteIssueReminder($reminderId)
+    public function imaticReminderDeleteIssueReminder($reminderId, $delete = false)
     {
         $db = db_get_table('imatic_reminder_remind_issue');
         $sql = "UPDATE " . $db . " SET deleted_at='" . db_now() . "' WHERE id=" . $reminderId;
+
+        if ($delete) {
+            $sql = "DELETE FROM " . $db . " WHERE id=" . $reminderId;
+        }
 
         db_query($sql);
         return db_affected_rows();

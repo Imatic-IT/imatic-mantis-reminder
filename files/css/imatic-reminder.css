@@ -41,3 +41,7 @@
     color: white !important;
     border-radius: 5px;
 }
+
+#imatic-reminder-modal{
+    overflow-y:auto;
+}

@@ -6,8 +6,7 @@ auth_ensure_user_authenticated();
 
 if (isset($_POST) && !empty($_POST) && isset($_POST['id']) && !empty($_POST['id'])) {
 
-
-    $affected_row = plugin_get()->imaticReminderDeleteIssueReminder($_POST['id']);
+    $affected_row = plugin_get()->imaticReminderDeleteIssueReminder($_POST['id'], true);
 
     if ($affected_row == 0) {
         $response = [

@@ -2,10 +2,12 @@
 
 $users = plugin_get()->imaticReminderGetAllIssueUsers();
 $reminds = plugin_get()->imaticReminderGetAllIssueReminders(gpc_get_string('id'));
+$countReminds = count($reminds);
 
 ?>
 
 <div id="imatic-reminder-modal" class="modal" tabindex="-1" role="dialog">
+    <div id="count-reminders" data-count="<?php echo $countReminds ?>"></div>
     <div class="modal-dialog imatic-remind-modal" role="document">
         <div class="modal-content">
             <div class="modal-header">

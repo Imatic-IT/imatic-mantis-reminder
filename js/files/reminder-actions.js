@@ -1,6 +1,5 @@
 import {showMessages} from './utils';
 import {sendFormData} from './utils';
-
 function addEventListenersToButtons() {
     let editButtons = document.querySelectorAll('.edit-reminder');
     let deleteButtons = document.querySelectorAll('.delete-reminder');
@@ -25,8 +24,9 @@ function addEventListenersToButtons() {
     deleteButtons.forEach(function (button) {
         button.addEventListener('click', function (e) {
             e.preventDefault()
+
             const reminderId = this.getAttribute("data-id");
-            const action = this.getAttribute("data-action");
+                const action = this.getAttribute("data-action");
             let table = document.getElementById('reminder-table-' + reminderId);
 
             let formData = new FormData();
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             <td>
                                 <textarea name="message" class="form-control" rows="1" cols="20">${rowData.message}</textarea>
                             </td>
-                            <td>${rowData.reminded ? '<i class="btn btn-success btn-xs fa fa-check"/>' : '<i class="btn btn-danger btn-xs fa fa-close" />'}</td>
+                            <td class="text-center"><i class="fa fa-close text-danger" /></td>
                             <td>
                                 <button type="button" class="btn btn-primary btn-xs edit-reminder" data-id="${rowData.id}"
                                         data-action="${rowData.edit_action}">
