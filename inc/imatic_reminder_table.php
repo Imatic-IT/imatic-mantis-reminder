@@ -1,11 +1,5 @@
 <?php
 
-if (plugin_get()->imaticRemindersAccessTreshold()) {
-    $reminders = plugin_get()->imaticReminderGetAllIssueReminders(gpc_get_string('id'));
-} else {
-    $reminders = plugin_get()->imaticReminderGetAllIssueRemindersByUser(gpc_get_string('id'), auth_get_current_user_id());
-}
-
 ?>
     <div id="issue-reminds" class="">
         <h3><?php echo lang_get('imatic_remind_issue_reminds') ?></h3>

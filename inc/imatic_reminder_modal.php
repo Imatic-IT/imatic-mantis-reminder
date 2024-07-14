@@ -1,13 +1,18 @@
 <?php
 
 $users = plugin_get()->imaticReminderGetAllIssueUsers();
-$reminds = plugin_get()->imaticReminderGetAllIssueReminders(gpc_get_string('id'));
-$countReminds = count($reminds);
+if (plugin_get()->imaticRemindersAccessTreshold()) {
+    $reminders = plugin_get()->imaticReminderGetAllIssueReminders(gpc_get_string('id'));
+} else {
+    $reminders = plugin_get()->imaticReminderGetAllIssueRemindersByUser(gpc_get_string('id'), auth_get_current_user_id());
+}
+
+$countReminders = count($reminders);
 
 ?>
 
 <div id="imatic-reminder-modal" class="modal" tabindex="-1" role="dialog">
-    <div id="count-reminders" data-count="<?php echo $countReminds ?>"></div>
+    <div id="count-reminders" data-count="<?php echo $countReminders ?>"></div>
     <div class="modal-dialog imatic-remind-modal" role="document">
         <div class="modal-content">
             <div class="modal-header">
