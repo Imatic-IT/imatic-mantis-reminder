@@ -7,7 +7,7 @@ if (plugin_get()->imaticRemindersAccessTreshold()) {
     $reminders = plugin_get()->imaticReminderGetAllIssueRemindersByUser(gpc_get_string('id'), auth_get_current_user_id());
 }
 
-$countReminders = count($reminders);
+$countReminders = count(array_filter($reminders, fn($reminder) => $reminder['reminded'] === 'f'));
 
 ?>
 
@@ -29,16 +29,17 @@ $countReminders = count($reminders);
 
                     <div class="modal-recipients">
 
-                        <p><?php echo lang_get('imatic_add_recipients') ?></p>
-
-                        <select class="modal-recipients-select w-100" name="users[]" multiple="multiple" required>
+                        <label for="recipients-select"><?php echo lang_get('imatic_add_recipients') ?></label>
+                        <select id="recipients-select" class="modal-recipients-select w-100" name="users[]" multiple="multiple" required>
                             <?php
-
                             foreach ($users as $user) {
-                                echo '<option value="' . $user['id'] . '">' . print_icon($user['id']) . ($user['username']) . '</option>';
+                                echo '<option value="' . htmlspecialchars($user['id'], ENT_QUOTES, 'UTF-8') . '">'
+                                    . print_icon($user['id']) . htmlspecialchars($user['username'], ENT_QUOTES, 'UTF-8')
+                                    . '</option>';
                             }
                             ?>
                         </select>
+
                     </div>
 
 
@@ -48,9 +49,10 @@ $countReminders = count($reminders);
                     <div class="container">
                         <div class="row">
                             <div class="col-md-3">
-                                <p><?php echo lang_get('imatic_add_when_send_reminder') ?></p>
 
-                                <input type="datetime-local" name="remind_at" required>
+                                <label for="remind_at"><?php echo lang_get('imatic_add_when_send_reminder') ?></label>
+                                <br>
+                                <input id="remind_at" type="datetime-local" name="remind_at" required>
                                 <input type="hidden" name="issue_id" value="<?php echo gpc_get_string('id') ?>">
 
                             </div>
