@@ -134,6 +134,10 @@ class ImaticReminderPlugin extends MantisPlugin
 
             $t_users = project_get_all_user_rows($t_bug->project_id);
 
+            usort($t_users, function ($a, $b) {
+                return strcasecmp($a['username'], $b['username']);
+            });
+
             return $t_users;
 
         } else {
