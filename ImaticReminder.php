@@ -112,8 +112,12 @@ class ImaticReminderPlugin extends MantisPlugin
             'imatic_reminder_page' => self::IMATIC_REMINDER_PAGE,
         ]));
 
-        echo '<script id="imaticReminderData" data-data="' . $t_data . '" src="' . plugin_file('imatic-reminder.js') . '&v=' . $this->version . '"></script>
-            <link rel="stylesheet" type="text/css" href="' . plugin_file('css/imatic-reminder.css') . '&v=' . $this->version . '" />';
+        echo '
+        <link rel="stylesheet" type="text/css" href="' . plugin_file('css/select2.min.css') . '" />;
+        <script  src="' . plugin_file('js/select2.full.min.js') . '"></script>
+        <script id="imaticReminderData" data-data="' . $t_data . '" src="' . plugin_file('imatic-reminder.js') . '&v=' . $this->version . '"></script>
+        <link rel="stylesheet" type="text/css" href="' . plugin_file('css/imatic-reminder.css') . '&v=' . $this->version . '" />
+        ';
     }
 
     public function imaticRemindersAccessTreshold()
@@ -157,7 +161,7 @@ class ImaticReminderPlugin extends MantisPlugin
         }
 
         $db = db_get_table('imatic_reminder_remind_issue');
-        $sql = 'SELECT * FROM ' . $db . ' WHERE issue_id = ' . $issueId ;
+        $sql = 'SELECT * FROM ' . $db . ' WHERE issue_id = ' . $issueId;
         $sql .= ' ORDER BY remind_at ASC';
         $result = iterator_to_array(db_query($sql, []));
 
