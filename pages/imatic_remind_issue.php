@@ -1,5 +1,6 @@
 <?php
 
+reminderUserLogin();
 $reminder = new ImaticReminderPlugin('reminder');
 
 require_once(dirname(__FILE__, 4) . DIRECTORY_SEPARATOR . 'core.php');
@@ -48,4 +49,21 @@ function renderResult($bugId, $recipient)
     echo sprintf("Reminder sent for issue: %s<br />", $bugId);
     echo sprintf("Recipient: %s<br />", $recipient);
     echo sprintf("%s\n", '');
+}
+
+
+function reminderUserLogin()
+{
+    global $g_cache_current_user_id;
+
+    $query = sprintf("SELECT id FROM %s WHERE username='%s'",db_get_table( 'user' ), "reminder");
+
+    $result = db_query($query);
+    $row = db_fetch_array($result);
+    if(!isset($row['id']))
+    {
+        throw new exception("Need to create user with name reminder");
+    }
+    $g_cache_current_user_id = $row['id'];
+
 }
