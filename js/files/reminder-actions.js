@@ -70,7 +70,9 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(data => {
                 if (data && data.status === 200) {
                     showMessages(data.message, "#DEF1D8");
-                    this.reset();
+
+                    document.getElementById('remind_at').value = '';
+                    document.getElementById('comment').value = '';
 
                     let table = document.getElementById('reminders-table');
                     let tbody = document.createElement('tbody');
