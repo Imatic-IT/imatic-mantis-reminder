@@ -4,8 +4,13 @@ require_api('authentication_api.php');
 
 auth_ensure_user_authenticated();
 
-if (isset($_POST) && !empty($_POST) && isset($_POST['id']) && !empty($_POST['id'] && isset($_POST['user_id']) && !empty($_POST['user_id'] && isset($_POST['remind_at']) && !empty($_POST['remind_at'])))) {
+function is_valid_reminder_request(array $post): bool
+{
+    return !empty($post['id']) && !empty($post['user_id']) && !empty($post['remind_at']);
+}
 
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_valid_reminder_request($_POST)) {
     $affected_row = plugin_get()->imaticReminderUpdateIssueReminder($_POST['id'], $_POST['user_id'], $_POST['remind_at'], $_POST['message']);
 
     if ($affected_row == 0) {

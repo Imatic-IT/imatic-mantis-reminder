@@ -14,7 +14,7 @@ class ImaticReminderPlugin extends MantisPlugin
     {
         $this->name = 'ImaticReminder';
         $this->description = lang_get('reminder_plugin_desc');
-        $this->version = '3.0';
+        $this->version = '3.0.1';
         $this->requires = array('MantisCore' => '2.0.0',);
         $this->author = 'Imatic software';
         $this->contact = 'info@imatic.cz';
@@ -114,7 +114,9 @@ class ImaticReminderPlugin extends MantisPlugin
 
         echo '
         <link rel="stylesheet" type="text/css" href="' . plugin_file('css/select2.min.css') . '" />;
+        <link rel="stylesheet" type="text/css" href="' . plugin_file('css/flatpickr.min.css') . '" />;
         <script  src="' . plugin_file('js/select2.full.min.js') . '"></script>
+        <script  src="' . plugin_file('js/flatpickr.js') . '"></script>
         <script id="imaticReminderData" data-data="' . $t_data . '" src="' . plugin_file('imatic-reminder.js') . '&v=' . $this->version . '"></script>
         <link rel="stylesheet" type="text/css" href="' . plugin_file('css/imatic-reminder.css') . '&v=' . $this->version . '" />
         ';
@@ -198,7 +200,12 @@ class ImaticReminderPlugin extends MantisPlugin
     {
         $remindAt = plugin_get()->imaticConvertToUnixTimestamp($remindAt);
         $db = db_get_table('imatic_reminder_remind_issue');
-        $sql = "UPDATE " . $db . " SET remind_at='" . $remindAt . "', message='" . $message . "' WHERE id=" . $reminderId . " AND user_id=" . $userId;
+        $sql = "UPDATE ";
+        $sql .= $db . " SET remind_at='" . $remindAt . "'";
+        $sql .= ", message='" . $message . "'";
+        $sql .= ", reminded='false'";
+        $sql .= ", updated_at='" . db_now() . "'";
+        $sql .= " WHERE id=" . $reminderId . " AND user_id=" . $userId;
 
         db_query($sql);
         return db_affected_rows();

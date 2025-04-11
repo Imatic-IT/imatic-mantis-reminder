@@ -17,6 +17,12 @@ function addEventListenersToButtons() {
             });
             formData.append('action', action);
 
+            const icon = table.querySelector('.fa-check');
+            if (icon) {
+                icon.classList.remove('fa-check', 'text-success');
+                icon.classList.add('fa-close', 'text-danger');
+            }
+
             sendFormData(formData);
         });
     });

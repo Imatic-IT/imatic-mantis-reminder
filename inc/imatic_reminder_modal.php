@@ -52,7 +52,7 @@ $countReminders = count(array_filter($reminders, fn($reminder) => $reminder['rem
 
                                 <label for="remind_at"><?php echo lang_get('imatic_add_when_send_reminder') ?></label>
                                 <br>
-                                <input id="remind_at" type="datetime-local" name="remind_at" required>
+                                <input id="remind_at" name="remind_at" required>
                                 <input type="hidden" name="issue_id" value="<?php echo gpc_get_string('id') ?>">
 
                             </div>
