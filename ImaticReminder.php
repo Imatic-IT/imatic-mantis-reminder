@@ -14,7 +14,7 @@ class ImaticReminderPlugin extends MantisPlugin
     {
         $this->name = 'ImaticReminder';
         $this->description = lang_get('reminder_plugin_desc');
-        $this->version = '3.0.1';
+        $this->version = '3.1.2';
         $this->requires = array('MantisCore' => '2.0.0',);
         $this->author = 'Imatic software';
         $this->contact = 'info@imatic.cz';
