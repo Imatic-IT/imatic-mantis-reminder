@@ -108,6 +108,10 @@ class ImaticReminderPlugin extends MantisPlugin
 
     public function layoutBodyEndHook($p_event)
     {
+        if (!isset($_GET['id'])) {
+            return;
+        }
+
         $t_data = htmlspecialchars(json_encode([
             'imatic_reminder_page' => self::IMATIC_REMINDER_PAGE,
         ]));
