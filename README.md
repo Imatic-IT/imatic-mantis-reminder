@@ -37,11 +37,6 @@ Ensure you have a configured cron job to run the notification sending script.
 #### Configuration Parameters:
 
 ##### Time Interval Settings:
-- **`imatic_reminder_time_interval_start`:**
-   - **Description:** This parameter defines the start of the time interval (in minutes) within which the reminder can be sent.
-   - **Example:** `'imatic_reminder_time_interval_start' => 60`
-   - **Usage:** If set to 60, the reminder will start being considered for sending 60 minutes before the scheduled time.
-
 - **`imatic_reminder_time_interval_end`:**
    - **Description:** This parameter defines the end of the time interval (in minutes) within which the reminder can be sent.
    - **Example:** `'imatic_reminder_time_interval_end' => 60`

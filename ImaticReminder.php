@@ -49,7 +49,6 @@ class ImaticReminderPlugin extends MantisPlugin
             'reminder_colsep' => ';',
             'reminder_details' => OFF,
             'imatic_reminders_access_threshold' => MANAGER,
-            'imatic_reminder_time_interval_start' => 60,
             'imatic_reminder_time_interval_end' => 60,
             'imatic_reminder_mail_subject_prefix' => lang_get('imatic_reminder_reminder_email_subject_prefix'),
             'imatic_reminder_mail_subject_prefix_icon' => '&#128276;',  // Icon from https://utf8-icons.com/bell-128276
@@ -226,9 +225,8 @@ class ImaticReminderPlugin extends MantisPlugin
     {
         $db = db_get_table('imatic_reminder_remind_issue');
         $current_time = time();
-        $reminder_time_start = $current_time - (plugin_config_get('imatic_reminder_time_interval_start') * 60); // - minutes from current time
         $reminder_time_end = $current_time + (plugin_config_get('imatic_reminder_time_interval_end') * 60); // + minutes from current time
-        $sql = 'SELECT * FROM ' . $db . ' WHERE remind_at >= ' . $reminder_time_start . ' AND remind_at <= ' . $reminder_time_end . ' AND reminded = false AND deleted_at IS NULL';
+        $sql = 'SELECT * FROM ' . $db . ' WHERE remind_at <= ' . $reminder_time_end . ' AND reminded = false AND deleted_at IS NULL';
         $result = iterator_to_array(db_query($sql, []));
 
         return $result;
