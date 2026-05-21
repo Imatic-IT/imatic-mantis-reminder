@@ -31,14 +31,14 @@ foreach ($bugsForRemind as $bugReminder) {
 
     if (OFF == config_get('email_send_using_cronjob')) {
         email_send_all();
-        $result = $reminder->imaticMarkIssueAsReminded($bugReminder['id'], $bugReminder['user_id']);
+    }
 
-        if ($result) {
-            renderResult($bug['id'], $bugReminder['user_email']);
+    $result = $reminder->imaticMarkIssueAsReminded($bugReminder['id'], $bugReminder['user_id']);
 
-        } else {
-            echo "Failed to send reminder for issue: " . $bug['id'] . "\n";
-        }
+    if ($result) {
+        renderResult($bug['id'], $bugReminder['user_email']);
+    } else {
+        echo "Failed to send reminder for issue: " . $bug['id'] . "\n";
     }
 }
 
