@@ -205,8 +205,7 @@ class ImaticReminderPlugin extends MantisPlugin
     {
         $remindAt = plugin_get()->imaticConvertToUnixTimestamp($remindAt);
         $db = db_get_table('imatic_reminder_remind_issue');
-        // reschedule assignments clear deleted_at so the revived reminder becomes
-        // visible to the cron again (see imatic_reminder_reschedule_assignments).
+        // clears deleted_at so a revived reminder is visible to the cron again
         $assignments = imatic_reminder_reschedule_assignments((int)$remindAt, $message, (int)db_now());
         $sql = "UPDATE " . $db . " SET " . imatic_reminder_render_set_clause($assignments);
         $sql .= " WHERE id=" . $reminderId . " AND user_id=" . $userId;
@@ -237,11 +236,7 @@ class ImaticReminderPlugin extends MantisPlugin
     {
 
         $db = db_get_table('imatic_reminder_remind_issue');
-        // Only flip the reminded flag. reminded=true alone excludes the row from
-        // the cron (imaticGetAllNotRemindedIssues). deleted_at must stay reserved
-        // for actual user deletion: setting it here conflated "already fired" with
-        // "deleted" and, once such a reminder was rescheduled, left it invisible to
-        // the cron forever (issue #0086262 / #85433).
+        // only reminded=true; deleted_at stays reserved for real deletion (#0086262)
         $sql = "UPDATE " . $db . " SET reminded=true WHERE id=" . $reminderId . " AND user_id=" . $userId;
 
         db_query($sql);
