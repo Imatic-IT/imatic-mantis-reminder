@@ -6,6 +6,8 @@
 // TODO : daily weekly .. turn of remind where ?.
 // TODO VALIDATE IN JS IF DATE IS IN THE PAST OR IS EMPTY
 
+require_once __DIR__ . '/core/imatic_reminder_pure.php';
+
 class ImaticReminderPlugin extends MantisPlugin
 {
     private const IMATIC_REMINDER_PAGE = 'imatic_remind_issue.php';
@@ -203,11 +205,10 @@ class ImaticReminderPlugin extends MantisPlugin
     {
         $remindAt = plugin_get()->imaticConvertToUnixTimestamp($remindAt);
         $db = db_get_table('imatic_reminder_remind_issue');
-        $sql = "UPDATE ";
-        $sql .= $db . " SET remind_at='" . $remindAt . "'";
-        $sql .= ", message='" . $message . "'";
-        $sql .= ", reminded='false'";
-        $sql .= ", updated_at='" . db_now() . "'";
+        // reschedule assignments clear deleted_at so the revived reminder becomes
+        // visible to the cron again (see imatic_reminder_reschedule_assignments).
+        $assignments = imatic_reminder_reschedule_assignments((int)$remindAt, $message, (int)db_now());
+        $sql = "UPDATE " . $db . " SET " . imatic_reminder_render_set_clause($assignments);
         $sql .= " WHERE id=" . $reminderId . " AND user_id=" . $userId;
 
         db_query($sql);
@@ -236,7 +237,12 @@ class ImaticReminderPlugin extends MantisPlugin
     {
 
         $db = db_get_table('imatic_reminder_remind_issue');
-        $sql = "UPDATE " . $db . " SET reminded=true, deleted_at=" . time() . " WHERE id=" . $reminderId . " AND user_id=" . $userId;
+        // Only flip the reminded flag. reminded=true alone excludes the row from
+        // the cron (imaticGetAllNotRemindedIssues). deleted_at must stay reserved
+        // for actual user deletion: setting it here conflated "already fired" with
+        // "deleted" and, once such a reminder was rescheduled, left it invisible to
+        // the cron forever (issue #0086262 / #85433).
+        $sql = "UPDATE " . $db . " SET reminded=true WHERE id=" . $reminderId . " AND user_id=" . $userId;
 
         db_query($sql);
         return db_affected_rows();
