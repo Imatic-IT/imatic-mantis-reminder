@@ -56,6 +56,10 @@ function addEventListenersToButtons() {
 
 document.addEventListener('DOMContentLoaded', function () {
     let reminderCreateForm = document.getElementById('imatic-reminder-create-form');
+    // The script loads on every page with an "id" parameter, the form only on the issue view
+    if (!reminderCreateForm) {
+        return;
+    }
 
     reminderCreateForm.addEventListener('submit', function (e) {
         e.preventDefault()
