@@ -31,11 +31,11 @@ $(document).ready(function () {
     })
 
 
-    $('.close').on('click', function () {
+    $('#imatic-reminder-modal .close').on('click', function () {
         toggleImaticReminderModal();
     });
 
-    $('.other-button').on('click', function () {
+    $('#imatic-reminder-modal .other-button').on('click', function () {
         toggleImaticReminderModal();
     });
 });
